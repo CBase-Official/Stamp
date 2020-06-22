@@ -39,7 +39,20 @@
    width:100%;
    height:100%;
   }
-
+  .spin_class{
+    z-index: 10;
+    background: #353131;
+    top: 0;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    opacity: 0.6;
+    text-align: center;
+    padding-top: 20%;
+  }
+  .hide_spin{
+    display: none;
+  }
 
 
   

@@ -15,6 +15,7 @@ class App extends Component {
       reciver_transfer:"",
       transfer_token_id:"",
       token_id_arr:[],
+      is_visible_spin:false,
       img_arr: [
         {"title":"first","token_id":"a001","src":"http://qiniu.eth.fm/2020-03-18-WechatIMG60.jpeg"},
         {"title":"first","token_id":"a001","src":"http://mathwallet.oss-cn-hangzhou.aliyuncs.com/blog/2020/3%E6%9C%88/NFT/NTF-Gif-800.gif"},
@@ -56,7 +57,7 @@ class App extends Component {
       arrs.push(token_id)
     }
     this.setState({
-      token_id_arr: arrs
+      token_id_arr: arrs,
     })
   }
   getAccount = async (accountId)=>{
@@ -87,7 +88,8 @@ class App extends Component {
     }
     
     this.setState({
-      stamp_arr: datas
+      stamp_arr: datas,
+      is_visible_spin: true
     })
   }
   async signedInFlow() {
@@ -207,7 +209,9 @@ class App extends Component {
     }
     return (
       <div>
-        <div><Spin size="large" /></div>
+        <div className={!this.state.is_visible_spin ?"spin_class":"hide_spin"}>
+          <Spin size="large" tip="Loading..."/>
+          </div>
         
         <Layout>
           <Content className="HeaderAccountclass">
