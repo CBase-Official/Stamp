@@ -67,8 +67,8 @@ pub struct StampToken {
     // Vec<u8> is sha256 of account, makes it safer and is how fungible token also works
     pub owner_id: AccountId,
     pub base_uri: String,
-    pub count_id: u32,
-    pub count_id_token: UnorderedMap<i32, TokenId>,
+    pub count_id: u32,//stamp id total
+    pub count_id_token: UnorderedMap<i32, TokenId>,//stamp id to token_id
 }
 
 impl Default for StampToken {
@@ -88,8 +88,7 @@ impl StampToken  {
             stamps: UnorderedMap::new(b"stamps".to_vec()),
             base_uri: base_uri,
             count_id: 0,
-            count_id_token: UnorderedMap::new(b"".to_vec())
-            
+            count_id_token: UnorderedMap::new(b"".to_vec()),
         }
     }
 }
@@ -197,8 +196,9 @@ impl StampToken {
         self.stamps.insert(&token_id, &stamp_entry);
         self.count_id += 1;
         self.count_id_token.insert(&(self.count_id as i32), &token_id);
+       
+        
     }
-
     pub fn stamp_info(&self, token_id: TokenId) -> Option<StampEntry> {
         // Since Map doesn't have `contains` we use match
         let token_info_check = self.stamps.get(&token_id);
